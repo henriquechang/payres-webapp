@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Selecione o produto pedido pela: {{data.mesaSelecionada}}</h1>
+<div mat-dialog-content style="display: flex; flex-wrap:wrap;">  
+    <div style="flex: 0 0 35%;">
+        <mat-form-field>
+            <mat-select placeholder="Nome:" [(ngModel)]="produtoSelecionado" (ngModelChange)="onChange($event)" >
+                <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" mask="dot_separator.0" [(ngModel)]="quantidadeSelecionada" matInput placeholder="Quantidade:">
+        </mat-form-field> 
+    </div>
+    <mat-card style="flex: 0 0 55%; margin: 2px;" *ngIf="listaItensPedidos.length > 0">
+        <mat-list>
+            <h3 mat-subheader>Lista de Produtos Pedidos</h3>
+            <mat-list-item *ngFor="let itensPedidos of listaItensPedidos">
+                <a mat-line>{{itensPedidos.nome}} - {{itensPedidos.quantidade}}</a>
+                <mat-divider [inset]="true"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button cdkFocusInitial color="primary" (click)="lancarProduto()" >Lançar Produto</button>
+  <button [disabled]="listaItensPedidos.length === 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarPedido()">Finalizar</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+</div>
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
