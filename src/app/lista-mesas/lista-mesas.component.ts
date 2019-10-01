@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { GerarConsumoComponent } from '../gerar-consumo/gerar-consumo.component';
 import { ConsumoService } from '../consumo.service';
 import { itensPedidos } from '../consumo.service';
+import { Mesa } from '../consumo.service';
 
 @Component({
   selector: 'app-lista-mesas',
@@ -12,7 +13,8 @@ import { itensPedidos } from '../consumo.service';
 export class ListaMesasComponent implements OnInit {
 
   mesaSelecionada: string;
-  mesas: string[] = ['Mesa 1', 'Mesa 2', 'Mesa 3', 'Mesa 4', 'Mesa 5'];
+  mesas: Mesa[];
+  error: any;
   listaItensPedidos: itensPedidos[];
   @Output() listaMesaSelecionadaAtualizada = new EventEmitter();
   @Output() listaItensPedidosAtualizada = new EventEmitter();
@@ -35,7 +37,10 @@ export class ListaMesasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mesas.forEach(mesa => {this.consumoService.setValoresPagosMesaInit(mesa)});
+    this.consumoService.getListaMesas().subscribe(
+      (mesas: Mesa[]) => this.mesas = mesas,
+      (error: any) => this.error = error
+    );
   }
   
   onChange(){

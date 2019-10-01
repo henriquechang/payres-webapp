@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {itensPedidos} from '../consumo.service';
 import {ConsumoService} from '../consumo.service';
+import {Produto} from '../consumo.service';
 
 export interface DialogData {
   mesaSelecionada: string;
@@ -15,10 +16,11 @@ export interface DialogData {
 })
 export class GerarConsumoComponent implements OnInit {
   
-  produtos: string[] = ['Bolinho de Queijo', 'Batata Frita', 'Filé com fritas', 'Frango Grelhado', 'Peixe frito', 'Salada Caesar', 'Pudim de Leite', 'Sorvete de Chocolate','Água com gás', 'Coca-cola'];
+  produtos: Produto[];
   listaItensPedidos: itensPedidos[] = [];
-  produtoSelecionado: string;
+  produtoSelecionado: Produto;
   quantidadeSelecionada: number;
+  error: any;
 
   constructor(
     public dialogRef: MatDialogRef<GerarConsumoComponent>,
@@ -31,6 +33,10 @@ export class GerarConsumoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.consumoService.getListaProdutos().subscribe(
+      (produtos: Produto[]) => this.produtos = produtos,
+      (error: any) => this.error = error
+    );
   }
 
   lancarProduto(): void{
@@ -38,7 +44,7 @@ export class GerarConsumoComponent implements OnInit {
       this.openSnackBar();
     }
     else{
-      this.listaItensPedidos.push({nome: this.produtoSelecionado, quantidade: this.quantidadeSelecionada, mesaSelecionada: this.data.mesaSelecionada, valor: 20.30});
+      this.listaItensPedidos.push({nome: this.produtoSelecionado.nome, quantidade: this.quantidadeSelecionada, mesaSelecionada: this.data.mesaSelecionada, valor: this.produtoSelecionado.preco});
     }
   }
 

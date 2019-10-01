@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 export interface itensPedidos {
   nome: string;
@@ -12,6 +14,16 @@ export interface valorPagoMesa {
   valorPago: number;
 }
 
+export interface Mesa {
+  id: number;
+  valorPago: number;
+}
+
+export interface Produto {
+  id: number;
+  nome: string;
+  preco: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +35,17 @@ export class ConsumoService {
   listaItensPedidos: itensPedidos[] = [];
   listaValoresPagosMesa: valorPagoMesa[] = [];
 
-  constructor() { }
+  baseUrl = environment.baseUrl;
+
+  constructor(private http: HttpClient) { }
+
+  public getListaMesas(){
+    return this.http.get(this.baseUrl.concat('mesa/'));
+  }
+
+  public getListaProdutos(){
+    return this.http.get(this.baseUrl.concat('produto/'));
+  }
 
   public setMesaSelecionada(mesaSelecionada){
     this.mesaSelecionada = mesaSelecionada;

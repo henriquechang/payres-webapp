@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
 import {NgxMaskModule, IConfig } from 'ngx-mask'
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { ListaMesasComponent } from './lista-mesas/lista-mesas.component';
 import { MenuConsumoComponent } from './menu-consumo/menu-consumo.component';
@@ -56,7 +57,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatInputModule,
     MatSnackBarModule,
     MatDividerModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

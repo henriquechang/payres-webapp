@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Selecione o produto pedido pela: {{data.mesaSelecionada}}</h1>
+<h1 mat-dialog-title>Selecione o produto pedido pela: Mesa {{data.mesaSelecionada.id}}</h1>
 <div mat-dialog-content style="display: flex; flex-wrap:wrap;">  
     <div style="flex: 0 0 35%;">
         <mat-form-field>
             <mat-select placeholder="Nome:" [(ngModel)]="produtoSelecionado" (ngModelChange)="onChange($event)" >
-                <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto}}</mat-option>
+                <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto.id + ' - ' + produto.nome}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
@@ -14,7 +14,8 @@
         <mat-list>
             <h3 mat-subheader>Lista de Produtos Pedidos</h3>
             <mat-list-item *ngFor="let itensPedidos of listaItensPedidos">
-                <a mat-line>{{itensPedidos.nome}} - {{itensPedidos.quantidade}}</a>
+                <h4 mat-line>Nome: {{itensPedidos.nome}}</h4>
+                <a mat-line>Qtd: {{itensPedidos.quantidade}}</a>
                 <mat-divider [inset]="true"></mat-divider>
             </mat-list-item>
         </mat-list>
