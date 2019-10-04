@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {itensPedidos, Mesa} from './consumo.service';
+import {itensPedidosListagem, Mesa} from './consumo.service';
 import {ConsumoService} from './consumo.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
   title = 'payres-webapp';
   mesaSelecionada: Mesa;
-  listaItensPedidos: itensPedidos[] = [];
+  listaItensPedidos: itensPedidosListagem[] = [];
   valorTotal: number;
   valorPago: number;
   error: any;
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   atualizaMesaSelecionada(event){
     this.mesaSelecionada = event;
     this.consumoService.getListaItensPedidos(this.mesaSelecionada.id).subscribe(
-      (listaItensPedidos: itensPedidos[]) => {
+      (listaItensPedidos: itensPedidosListagem[]) => {
         this.listaItensPedidos  =  listaItensPedidos;
         this.valorTotal = this.gerarValorTotal( this.listaItensPedidos);
         this.valorPago = this.consumoService.getValoresPagosMesa(this.mesaSelecionada);
@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
 
   atualizaItensPedidosMesa(event){
     this.consumoService.getListaItensPedidos(this.mesaSelecionada.id).subscribe(
-      (listaItensPedidos: itensPedidos[]) => {
+      (listaItensPedidos: itensPedidosListagem[]) => {
         this.listaItensPedidos  =  listaItensPedidos;
-        this.valorTotal = this.gerarValorTotal( this.listaItensPedidos);
+        this.valorTotal = this.gerarValorTotal(this.listaItensPedidos);
       },
       (error: any) => this.error = error
     );

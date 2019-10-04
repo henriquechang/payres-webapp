@@ -1,12 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {itensPedidos} from '../consumo.service';
+import {itensPedidosEnvio, Mesa} from '../consumo.service';
 import {ConsumoService} from '../consumo.service';
 import {Produto} from '../consumo.service';
 
 export interface DialogData {
-  mesaSelecionada: string;
+  mesaSelecionada: Mesa;
 }
 
 @Component({
@@ -17,7 +17,7 @@ export interface DialogData {
 export class GerarConsumoComponent implements OnInit {
   
   produtos: Produto[];
-  listaItensPedidos: itensPedidos[] = [];
+  listaItensParaEnvio: itensPedidosEnvio[] = [];
   produtoSelecionado: Produto;
   quantidadeSelecionada: number;
   error: any;
@@ -44,7 +44,7 @@ export class GerarConsumoComponent implements OnInit {
       this.openSnackBar();
     }
     else{
-      this.listaItensPedidos.push({produto__nome: this.produtoSelecionado.nome, quantidade: this.quantidadeSelecionada, mesaSelecionada: this.data.mesaSelecionada, produto__preco: this.produtoSelecionado.preco});
+      this.listaItensParaEnvio.push({produto: this.produtoSelecionado, quantidade: this.quantidadeSelecionada, mesa: this.data.mesaSelecionada, pagamentoAberto: true});
     }
   }
 
@@ -59,8 +59,11 @@ export class GerarConsumoComponent implements OnInit {
   }
 
   finalizarPedido(){
-    this.consumoService.setListaItensPedidos(this.listaItensPedidos);
-    this.onNoClick();
+    this.consumoService.setListaItensParaEnvio(this.listaItensParaEnvio).subscribe(result => {
+        this.onNoClick();
+      },
+      (error: any) => this.error = error
+    );
   }
 }
 

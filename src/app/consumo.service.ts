@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-export interface itensPedidos {
+export interface itensPedidosListagem {
   produto__nome: string;
   quantidade: number;
   mesaSelecionada: string;
   produto__preco: number;
+}
+
+export interface itensPedidosEnvio {
+  produto: Produto;
+  quantidade: number;
+  mesa: Mesa;
+  pagamentoAberto: boolean;
 }
 
 export interface valorPagoMesa {
@@ -32,7 +39,7 @@ export interface Produto {
 export class ConsumoService {
 
   mesaSelecionada: string;
-  listaItensPedidos: itensPedidos[] = [];
+  listaItensPedidos: itensPedidosListagem[] = [];
   listaValoresPagosMesa: valorPagoMesa[] = [];
 
   baseUrl = environment.baseUrl;
@@ -55,16 +62,21 @@ export class ConsumoService {
     return this.mesaSelecionada;
   }
 
-  public setListaItensPedidos(listaItensPedidos){
-    if(listaItensPedidos){
-      listaItensPedidos.forEach(element => {
-        this.listaItensPedidos.push(element);
-      });
-    }
+  public setListaItensParaEnvio(listaItensPedidos){
+    let listaItensPedidosSimples = [];
+    listaItensPedidos.forEach(element => {
+      listaItensPedidosSimples.push({
+        produto: element.produto.id,
+        mesa: element.mesa.id,
+        quantidade: Number(element.quantidade),
+        pagamentoAberto: element.pagamentoAberto
+      })
+    });
+    return this.http.post(this.baseUrl.concat('produto_consumido_mesa/'), listaItensPedidosSimples);
   }
 
   public getListaItensPedidos(idMesa){
-    return this.http.get(this.baseUrl.concat('produto_consumido_mesa/'),
+    return this.http.get(this.baseUrl.concat('produto_valor_mesa/'),
     {
       params: {
         mesa: idMesa,

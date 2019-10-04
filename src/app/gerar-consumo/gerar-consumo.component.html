@@ -10,12 +10,12 @@
             <input type="text" mask="dot_separator.0" [(ngModel)]="quantidadeSelecionada" matInput placeholder="Quantidade:">
         </mat-form-field> 
     </div>
-    <mat-card style="flex: 0 0 55%; margin: 2px;" *ngIf="listaItensPedidos.length > 0">
+    <mat-card style="flex: 0 0 55%; margin: 2px;" *ngIf="listaItensParaEnvio.length > 0">
         <mat-list>
             <h3 mat-subheader>Lista de Produtos Pedidos</h3>
-            <mat-list-item *ngFor="let itensPedidos of listaItensPedidos">
-                <h4 mat-line>Nome: {{itensPedidos.nome}}</h4>
-                <a mat-line>Qtd: {{itensPedidos.quantidade}}</a>
+            <mat-list-item *ngFor="let itensParaEnvio of listaItensParaEnvio">
+                <h4 mat-line>Nome: {{itensParaEnvio.produto.nome}}</h4>
+                <a mat-line>Qtd: {{itensParaEnvio.quantidade}}</a>
                 <mat-divider [inset]="true"></mat-divider>
             </mat-list-item>
         </mat-list>
@@ -23,7 +23,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-flat-button cdkFocusInitial color="primary" (click)="lancarProduto()" >Lançar Produto</button>
-  <button [disabled]="listaItensPedidos.length === 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarPedido()">Finalizar</button>
+  <button [disabled]="listaItensParaEnvio.length === 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarPedido()">Finalizar</button>
   <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>
 

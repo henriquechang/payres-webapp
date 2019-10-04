@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { GerarConsumoComponent } from '../gerar-consumo/gerar-consumo.component';
 import { ConsumoService } from '../consumo.service';
-import { itensPedidos } from '../consumo.service';
+import { itensPedidosListagem } from '../consumo.service';
 import { Mesa } from '../consumo.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ListaMesasComponent implements OnInit {
   mesaSelecionada: Mesa;
   mesas: Mesa[];
   error: any;
-  listaItensPedidos: itensPedidos[];
+  listaItensPedidos: itensPedidosListagem[];
   @Output() listaMesaSelecionadaAtualizada = new EventEmitter();
   @Output() listaItensPedidosAtualizada = new EventEmitter();
 
@@ -30,7 +30,7 @@ export class ListaMesasComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         this.consumoService.getListaItensPedidos(this.mesaSelecionada.id).subscribe(
-          (listaItensPedidos: itensPedidos[]) =>  {
+          (listaItensPedidos: itensPedidosListagem[]) =>  {
             this.listaItensPedidos  =  listaItensPedidos,
             this.listaItensPedidosAtualizada.emit(this.listaItensPedidos);
           },
