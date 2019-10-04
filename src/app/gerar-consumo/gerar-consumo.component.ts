@@ -44,7 +44,7 @@ export class GerarConsumoComponent implements OnInit {
       this.openSnackBar();
     }
     else{
-      this.listaItensPedidos.push({nome: this.produtoSelecionado.nome, quantidade: this.quantidadeSelecionada, mesaSelecionada: this.data.mesaSelecionada, valor: this.produtoSelecionado.preco});
+      this.listaItensPedidos.push({produto__nome: this.produtoSelecionado.nome, quantidade: this.quantidadeSelecionada, mesaSelecionada: this.data.mesaSelecionada, produto__preco: this.produtoSelecionado.preco});
     }
   }
 

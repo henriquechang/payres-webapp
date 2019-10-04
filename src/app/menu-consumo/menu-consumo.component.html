@@ -1,9 +1,9 @@
-<p>Lista de consumo para a: {{'Mesa ' + mesaSelecionada.id}}</p>
+<p *ngIf="mesaSelecionada">Lista de consumo para a: {{'Mesa ' +  mesaSelecionada.id}}</p>
 <mat-list>
     <mat-list-item *ngFor="let itensPedidos of listaItensPedidos">
-        <h4 mat-line>Nome: {{itensPedidos.nome}}</h4>
+        <h4 mat-line>Nome: {{itensPedidos.produto__nome}}</h4>
         <a mat-line>Qtd: {{itensPedidos.quantidade}}</a>
-        <a mat-line>{{itensPedidos.valor | currency: 'BRL'}}</a>
+        <a mat-line>{{itensPedidos.produto__preco*itensPedidos.quantidade | currency: 'BRL'}}</a>
         <mat-divider [inset]="true"></mat-divider>
     </mat-list-item>
 </mat-list>

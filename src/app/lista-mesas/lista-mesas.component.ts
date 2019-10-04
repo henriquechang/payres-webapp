@@ -12,7 +12,7 @@ import { Mesa } from '../consumo.service';
 })
 export class ListaMesasComponent implements OnInit {
 
-  mesaSelecionada: string;
+  mesaSelecionada: Mesa;
   mesas: Mesa[];
   error: any;
   listaItensPedidos: itensPedidos[];
@@ -29,8 +29,13 @@ export class ListaMesasComponent implements OnInit {
         data: {mesaSelecionada: mesaSelecionada}
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.listaItensPedidos = this.consumoService.getListaItensPedidos();
-        this.listaItensPedidosAtualizada.emit(this.listaItensPedidos);
+        this.consumoService.getListaItensPedidos(this.mesaSelecionada.id).subscribe(
+          (listaItensPedidos: itensPedidos[]) =>  {
+            this.listaItensPedidos  =  listaItensPedidos,
+            this.listaItensPedidosAtualizada.emit(this.listaItensPedidos);
+          },
+          (error: any) => this.error = error
+        );
         console.log("closeModal")
       });
     }

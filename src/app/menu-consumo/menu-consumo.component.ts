@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ConsumoService } from '../consumo.service';
+import { ConsumoService, Mesa } from '../consumo.service';
 import { valorPagoMesa } from '../consumo.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { valorPagoMesa } from '../consumo.service';
 export class MenuConsumoComponent implements OnInit {
 
   @Input() listaItensPedidos: []; 
-  @Input() mesaSelecionada: string;
+  @Input() mesaSelecionada: Mesa;
   @Input() valorTotal: number;
   @Input() valorPago: number = 0;
   listaValoresPagosMesa: valorPagoMesa[] = [];

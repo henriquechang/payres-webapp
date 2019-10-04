@@ -3,10 +3,10 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 export interface itensPedidos {
-  nome: string;
+  produto__nome: string;
   quantidade: number;
   mesaSelecionada: string;
-  valor: number;
+  produto__preco: number;
 }
 
 export interface valorPagoMesa {
@@ -63,8 +63,13 @@ export class ConsumoService {
     }
   }
 
-  public getListaItensPedidos(){
-    return this.listaItensPedidos;
+  public getListaItensPedidos(idMesa){
+    return this.http.get(this.baseUrl.concat('produto_consumido_mesa/'),
+    {
+      params: {
+        mesa: idMesa,
+      }
+    });
   }
 
   public removeListaItensPedidosMesa(mesaSelecionada){

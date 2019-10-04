@@ -5,7 +5,8 @@
         <mat-card style="flex: 0 0 25%; margin: 20px;">
             <app-lista-mesas style="flex: 0 0 25%; margin-top: 20px;" 
             (listaMesaSelecionadaAtualizada)="atualizaMesaSelecionada($event)" 
-            (listaItensPedidosAtualizada)="atualizaItensPedidosMesa($event)">
+            (listaItensPedidosAtualizada)="atualizaItensPedidosMesa($event)"
+            (mesaSelecionadaInicial)="setMesaInicial($event)">
             </app-lista-mesas>
         </mat-card>
         <mat-card style="flex: 0 0 65%; margin: 20px;">
