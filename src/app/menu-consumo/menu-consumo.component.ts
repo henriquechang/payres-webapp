@@ -12,23 +12,42 @@ export class MenuConsumoComponent implements OnInit {
   @Input() listaItensPedidos: []; 
   @Input() mesaSelecionada: Mesa;
   @Input() valorTotal: number;
-  @Input() valorPago: number = 0;
-  listaValoresPagosMesa: valorPagoMesa[] = [];
+  @Input() listaValoresPagosMesa: valorPagoMesa[] = [];
+  @Input() valorRestante;
   valor: number = 0;
+  error: any;
 
   constructor( private consumoService: ConsumoService) { }
 
   ngOnInit() {
   }
 
+  ngOnChanges(){
+    this.valor = 0;
+  }
+
   lancarValor(valor){
-    valor = parseFloat(valor);
     this.valorTotal = Math.round(this.valorTotal * 100) / 100;
-    this.valorPago = Math.round(this.valorPago * 100) / 100;
-    if(Math.round((this.valorTotal - this.valorPago) * 100) / 100 >= valor){
-      this.valorPago += valor;
+    this.valorRestante = this.consumoService.calcularValorRestante(this.listaValoresPagosMesa, this.valorTotal);
+    valor = parseFloat(valor);
+    if(valor > 0 && valor <= this.valorRestante){
+      this.consumoService.setValoresPagosMesa(this.mesaSelecionada.id, valor).subscribe((result)=> {
+          this.buscarValores();
+        },
+        (error: any) => this.error = error
+      );
     }
-    this.consumoService.setValoresPagosMesa(this.mesaSelecionada, this.valorPago);
+  }
+
+  buscarValores(){
+    this.consumoService.getValoresPagosMesa(this.mesaSelecionada.id).subscribe(
+      (listaValoresPagosMesa: valorPagoMesa[]) => {
+        this.listaValoresPagosMesa = listaValoresPagosMesa;
+        this.valorRestante = this.consumoService.calcularValorRestante(this.listaValoresPagosMesa, this.valorTotal);
+        this.valor = 0;
+      },
+      (error: any) => this.error = error
+    );
   }
 
   finalizarConta(){
@@ -36,6 +55,5 @@ export class MenuConsumoComponent implements OnInit {
     this.consumoService.zeraValorMesa(this.mesaSelecionada);
     this.listaItensPedidos = [];
     this.valorTotal = 0;
-    this.valorPago = 0;
   }
 }

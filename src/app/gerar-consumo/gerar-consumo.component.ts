@@ -59,7 +59,7 @@ export class GerarConsumoComponent implements OnInit {
   }
 
   finalizarPedido(){
-    this.consumoService.setListaItensParaEnvio(this.listaItensParaEnvio).subscribe(result => {
+    this.consumoService.setListaItensParaEnvio(this.listaItensParaEnvio).subscribe((result) => {
         this.onNoClick();
       },
       (error: any) => this.error = error

@@ -28,7 +28,7 @@ export class ListaMesasComponent implements OnInit {
         width: '600px',
         data: {mesaSelecionada: mesaSelecionada}
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         this.consumoService.getListaItensPedidos(this.mesaSelecionada.id).subscribe(
           (listaItensPedidos: itensPedidosListagem[]) =>  {
             this.listaItensPedidos  =  listaItensPedidos,

@@ -96,11 +96,33 @@ export class ConsumoService {
     this.listaValoresPagosMesa.push({mesa: mesaInicial, valorPago: 0});
   }
 
-  public setValoresPagosMesa(mesa, valor){
-    this.listaValoresPagosMesa.find(element => element.mesa === mesa).valorPago = valor;
+  public setValoresPagosMesa(idMesa, valor){
+    return this.http.post(this.baseUrl.concat('pagamento_mesa/'), 
+      {
+        valorPago: valor
+      }, 
+      {
+        params: {
+          mesa: idMesa,
+      }
+    });
   }
 
-  public getValoresPagosMesa(mesa){
-    return this.listaValoresPagosMesa.find(element => element.mesa === mesa).valorPago;
+  public getValoresPagosMesa(idMesa){
+    return this.http.get(this.baseUrl.concat('pagamento_mesa/'),
+    {
+      params: {
+        mesa: idMesa,
+      }
+    });
   }
+
+  public calcularValorRestante(listaValoresPagosMesa, valorTotal){
+    let valorPagoTotal = 0;
+    listaValoresPagosMesa.forEach(element => {
+      valorPagoTotal += Number(element.valorPago);
+    });
+    return Math.round((valorTotal - valorPagoTotal)* 100) / 100;
+  }
+
 }

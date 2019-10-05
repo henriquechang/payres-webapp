@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatChipsModule} from '@angular/material/chips';
 import {NgxMaskModule, IConfig } from 'ngx-mask'
 import { HttpClientModule } from '@angular/common/http'; 
 
@@ -57,6 +58,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatInputModule,
     MatSnackBarModule,
     MatDividerModule,
+    MatChipsModule,
     NgxMaskModule.forRoot(options),
     HttpClientModule
   ],
