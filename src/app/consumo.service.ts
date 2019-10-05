@@ -38,7 +38,6 @@ export interface Produto {
 
 export class ConsumoService {
 
-  mesaSelecionada: string;
   listaItensPedidos: itensPedidosListagem[] = [];
   listaValoresPagosMesa: valorPagoMesa[] = [];
 
@@ -52,14 +51,6 @@ export class ConsumoService {
 
   public getListaProdutos(){
     return this.http.get(this.baseUrl.concat('produto/'));
-  }
-
-  public setMesaSelecionada(mesaSelecionada){
-    this.mesaSelecionada = mesaSelecionada;
-  }
-
-  public getMesaSelecionada(){
-    return this.mesaSelecionada;
   }
 
   public setListaItensParaEnvio(listaItensPedidos){
@@ -84,16 +75,17 @@ export class ConsumoService {
     });
   }
 
-  public removeListaItensPedidosMesa(mesaSelecionada){
-    this.listaItensPedidos.splice(this.listaItensPedidos.findIndex(e => e.mesaSelecionada === mesaSelecionada),1);
+  public fechaPagamentoMesa(idMesa){
+    return this.http.post(this.baseUrl.concat('update_pagamento_aberto/'), 
+      null, {
+      params: {
+        mesa: idMesa
+      }
+    });
   }
 
   public zeraValorMesa(mesa){
     this.listaValoresPagosMesa.find(element => element.mesa === mesa).valorPago = 0;
-  }
-
-  public setValoresPagosMesaInit(mesaInicial){
-    this.listaValoresPagosMesa.push({mesa: mesaInicial, valorPago: 0});
   }
 
   public setValoresPagosMesa(idMesa, valor){

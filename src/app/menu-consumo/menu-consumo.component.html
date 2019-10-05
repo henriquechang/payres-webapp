@@ -1,9 +1,9 @@
 <p *ngIf="mesaSelecionada">Lista de consumo para a: {{'Mesa ' +  mesaSelecionada.id}}</p>
 <mat-list>
     <mat-list-item *ngFor="let itensPedidos of listaItensPedidos">
-        <h4 mat-line>Nome: {{itensPedidos.produto__nome}}</h4>
+        <h4 mat-line>Nome: {{itensPedidos.produto__nome}} - {{itensPedidos.produto__preco | currency: 'BRL'}}</h4>
         <a mat-line>Qtd: {{itensPedidos.quantidade}}</a>
-        <a mat-line>{{itensPedidos.produto__preco*itensPedidos.quantidade | currency: 'BRL'}}</a>
+        <a mat-line>Total: {{itensPedidos.produto__preco*itensPedidos.quantidade | currency: 'BRL'}}</a>
         <mat-divider [inset]="true"></mat-divider>
     </mat-list-item>
 </mat-list>
@@ -31,5 +31,5 @@
         <input  type="text" mask="comma_separator.2" [(ngModel)]="valor" matInput placeholder="Valor a ser Pago:">
     </mat-form-field>
     <button class="full-width" mat-flat-button cdkFocusInitial color="primary" (click)="lancarValor(valor)" >Lançar Valor</button>
-    <button [disabled]="valorTotal !== valorPago" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarConta()">Finalizar Conta</button>
+    <button [disabled]="valorRestante != 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarConta()">Finalizar Conta</button>
 </div>

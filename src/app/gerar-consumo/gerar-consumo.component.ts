@@ -55,7 +55,6 @@ export class GerarConsumoComponent implements OnInit {
   }
 
   onChange(){
-    console.log(this.produtoSelecionado);
   }
 
   finalizarPedido(){

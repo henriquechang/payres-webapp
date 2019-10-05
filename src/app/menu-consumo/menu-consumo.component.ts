@@ -51,9 +51,12 @@ export class MenuConsumoComponent implements OnInit {
   }
 
   finalizarConta(){
-    this.consumoService.removeListaItensPedidosMesa(this.mesaSelecionada);
-    this.consumoService.zeraValorMesa(this.mesaSelecionada);
-    this.listaItensPedidos = [];
-    this.valorTotal = 0;
+    this.consumoService.fechaPagamentoMesa(this.mesaSelecionada.id).subscribe(
+      (result) => {
+        this.listaItensPedidos = [];
+        this.buscarValores();
+      },
+      (error: any) => this.error = error
+    );
   }
 }

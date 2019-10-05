@@ -49,7 +49,6 @@ export class ListaMesasComponent implements OnInit {
   }
   
   onChange(){
-    this.consumoService.setMesaSelecionada(this.mesaSelecionada);
     this.listaMesaSelecionadaAtualizada.emit(this.mesaSelecionada);
   }
 
