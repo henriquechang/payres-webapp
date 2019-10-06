@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Selecione o produto pedido pela: Mesa {{data.mesaSelecionada.id}}</h1>
-<div mat-dialog-content style="display: flex; flex-wrap:wrap;">  
-    <div style="flex: 0 0 35%;">
+<div mat-dialog-content class="gerar-consumo-flex-container">  
+    <div class="gerar-consumo-flex-produto">
         <mat-form-field>
-            <mat-select placeholder="Nome:" [(ngModel)]="produtoSelecionado" (ngModelChange)="onChange($event)" >
+            <mat-select placeholder="Nome:" [(ngModel)]="produtoSelecionado">
                 <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto.id + ' - ' + produto.nome}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -10,13 +10,13 @@
             <input type="text" mask="dot_separator.0" [(ngModel)]="quantidadeSelecionada" matInput placeholder="Quantidade:">
         </mat-form-field> 
     </div>
-    <mat-card style="flex: 0 0 55%; margin: 2px;" *ngIf="listaItensParaEnvio.length > 0">
+    <mat-card class="gerar-consumo-flex-envio" *ngIf="listaItensParaEnvio.length > 0">
         <mat-list>
             <h3 mat-subheader>Lista de Produtos Pedidos</h3>
-            <mat-list-item *ngFor="let itensParaEnvio of listaItensParaEnvio">
+            <mat-list-item *ngFor="let itensParaEnvio of listaItensParaEnvio; let lastItem = last;">
                 <h4 mat-line>Nome: {{itensParaEnvio.produto.nome}}</h4>
                 <a mat-line>Qtd: {{itensParaEnvio.quantidade}}</a>
-                <mat-divider [inset]="true"></mat-divider>
+                <mat-divider *ngIf="!lastItem" [inset]="true"></mat-divider>
             </mat-list-item>
         </mat-list>
     </mat-card>
@@ -26,7 +26,3 @@
   <button [disabled]="listaItensParaEnvio.length === 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarPedido()">Finalizar</button>
   <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>
-
-<!-- Copyright 2019 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

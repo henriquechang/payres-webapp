@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Inject} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {itensPedidosEnvio, Mesa} from '../consumo.service';
-import {ConsumoService} from '../consumo.service';
-import {Produto} from '../consumo.service';
+import { Component, OnInit, Inject} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { itensPedidosEnvio, Mesa } from '../consumo.service';
+import { ConsumoService } from '../consumo.service';
+import { Produto } from '../consumo.service';
 
 export interface DialogData {
   mesaSelecionada: Mesa;
@@ -21,6 +21,7 @@ export class GerarConsumoComponent implements OnInit {
   produtoSelecionado: Produto;
   quantidadeSelecionada: number;
   error: any;
+  snackBarMessage: string;
 
   constructor(
     public dialogRef: MatDialogRef<GerarConsumoComponent>,
@@ -40,21 +41,27 @@ export class GerarConsumoComponent implements OnInit {
   }
 
   lancarProduto(): void{
-    if(!this.produtoSelecionado || !this.quantidadeSelecionada || this.quantidadeSelecionada < 0 || this.quantidadeSelecionada > 999){
-      this.openSnackBar();
+    if(!this.produtoSelecionado || !this.quantidadeSelecionada || this.quantidadeSelecionada > 99){
+      if(!this.produtoSelecionado){
+        this.snackBarMessage = "Favor selecionar um pedido."
+      }
+      else if(!this.quantidadeSelecionada){
+        this.snackBarMessage = "Favor selecionar a quantidade."
+      }
+      else {
+        this.snackBarMessage = "A quantidade máxima por pedido é 99."
+      }
+      this.openSnackBar(this.snackBarMessage);
     }
     else{
       this.listaItensParaEnvio.push({produto: this.produtoSelecionado, quantidade: this.quantidadeSelecionada, mesa: this.data.mesaSelecionada, pagamentoAberto: true});
     }
   }
 
-  openSnackBar(): void {
-    this._snackBar.openFromComponent(GerarConsumoSnackbarComponent, {
+  openSnackBar(snackBarMessage): void {
+    this._snackBar.open(snackBarMessage, 'Fechar', {
       duration: 5000,
     });
-  }
-
-  onChange(){
   }
 
   finalizarPedido(){
@@ -65,9 +72,3 @@ export class GerarConsumoComponent implements OnInit {
     );
   }
 }
-
-@Component({
-  selector: 'app-gerar-consumo-snackbar',
-  templateUrl: './gerar-consumo-snackbar.component.html'
-})
-export class GerarConsumoSnackbarComponent {}

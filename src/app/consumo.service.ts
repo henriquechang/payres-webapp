@@ -43,7 +43,7 @@ export class ConsumoService {
 
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getListaMesas(){
     return this.http.get(this.baseUrl.concat('mesa/'));
@@ -67,8 +67,7 @@ export class ConsumoService {
   }
 
   public getListaItensPedidos(idMesa){
-    return this.http.get(this.baseUrl.concat('produto_valor_mesa/'),
-    {
+    return this.http.get(this.baseUrl.concat('produto_valor_mesa/'), {
       params: {
         mesa: idMesa,
       }
@@ -76,8 +75,7 @@ export class ConsumoService {
   }
 
   public fechaPagamentoMesa(idMesa){
-    return this.http.post(this.baseUrl.concat('update_pagamento_aberto/'), 
-      null, {
+    return this.http.post(this.baseUrl.concat('update_pagamento_mesa/'), null, {
       params: {
         mesa: idMesa
       }
@@ -89,20 +87,15 @@ export class ConsumoService {
   }
 
   public setValoresPagosMesa(idMesa, valor){
-    return this.http.post(this.baseUrl.concat('pagamento_mesa/'), 
-      {
-        valorPago: valor
-      }, 
-      {
-        params: {
-          mesa: idMesa,
+    return this.http.post(this.baseUrl.concat('pagamento_mesa/'), { valorPago: valor }, {
+      params: {
+        mesa: idMesa,
       }
     });
   }
 
   public getValoresPagosMesa(idMesa){
-    return this.http.get(this.baseUrl.concat('pagamento_mesa/'),
-    {
+    return this.http.get(this.baseUrl.concat('pagamento_mesa/'), {
       params: {
         mesa: idMesa,
       }

@@ -1,0 +1,13 @@
+.gerar-consumo-flex-container{
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.gerar-consumo-flex-envio{
+    flex: 0 0 55%; 
+    margin: 2px;
+}
+
+.gerar-consumo-flex-produto{
+    flex: 0 0 35%;
+}

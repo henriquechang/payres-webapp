@@ -8,28 +8,28 @@
     </mat-list-item>
 </mat-list>
 <div *ngIf="listaItensPedidos.length > 0 && mesaSelecionada">
-    <div style="display:flex">
-        <p style="margin-right: 10px">Valor Total: </p>
-        <mat-chip-list style="align-self: center;">
+    <div class="menu-consumo-flex">
+        <p class="menu-margin-right-10">Valor Total: </p>
+        <mat-chip-list class="menu-align-center">
             <mat-chip color="primary" selected> {{valorTotal | currency:'BRL'}} </mat-chip>
         </mat-chip-list>
     </div>
-    <div style="display:inline-flex" *ngIf="listaValoresPagosMesa">
-        <p style="margin-right: 10px">Valores Parciais Pagos: </p>
-        <mat-chip-list style="align-self: center;"*ngFor="let valoresPagos of listaValoresPagosMesa;">
+    <div class="menu-consumo-flex-inline" *ngIf="listaValoresPagosMesa">
+        <p class="menu-margin-right-10">Valores Parciais Pagos: </p>
+        <mat-chip-list class="menu-align-center" *ngFor="let valoresPagos of listaValoresPagosMesa;">
             <mat-chip >{{valoresPagos.valorPago | currency:'BRL'}} </mat-chip>
         </mat-chip-list>
         <p></p>
     </div>
-    <div style="display:flex">
-        <p style="margin-right: 10px">Valor Restante: </p>
-        <mat-chip-list style="align-self: center;">
+    <div class="menu-consumo-flex">
+        <p class="menu-margin-right-10">Valor Restante: </p>
+        <mat-chip-list class="menu-align-center">
             <mat-chip color="warn" selected> {{valorRestante | currency:'BRL'}} </mat-chip>
         </mat-chip-list>
     </div>
-    <mat-form-field class="full-width">
-        <input  type="text" mask="comma_separator.2" [(ngModel)]="valor" matInput placeholder="Valor a ser Pago:">
+    <mat-form-field class="menu-margin-right-20">
+        <input type="text" mask="comma_separator.2" [(ngModel)]="valor" matInput placeholder="Valor Pago:">
     </mat-form-field>
-    <button class="full-width" mat-flat-button cdkFocusInitial color="primary" (click)="lancarValor(valor)" >Lançar Valor</button>
+    <button class="menu-margin-right-20" mat-flat-button cdkFocusInitial color="primary" (click)="lancarValor(valor)" >Lançar Valor</button>
     <button [disabled]="valorRestante != 0" mat-flat-button  cdkFocusInitial color="accent" (click)="finalizarConta()">Finalizar Conta</button>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { GerarConsumoComponent } from '../gerar-consumo/gerar-consumo.component';
 import { ConsumoService } from '../consumo.service';
 import { itensPedidosListagem } from '../consumo.service';
@@ -19,8 +19,9 @@ export class ListaMesasComponent implements OnInit {
   @Output() listaMesaSelecionadaAtualizada = new EventEmitter();
   @Output() listaItensPedidosAtualizada = new EventEmitter();
 
-  constructor(public dialog: MatDialog, private consumoService: ConsumoService) { 
-  }
+  constructor(
+    public dialog: MatDialog, 
+    private consumoService: ConsumoService) {}
 
   abrirModalProdutos(mesaSelecionada): void {
     if(mesaSelecionada){
@@ -36,7 +37,6 @@ export class ListaMesasComponent implements OnInit {
           },
           (error: any) => this.error = error
         );
-        console.log("closeModal")
       });
     }
   }

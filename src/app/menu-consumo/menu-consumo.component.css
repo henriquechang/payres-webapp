@@ -1,3 +1,19 @@
-.full-width{
+.menu-margin-right-20{
     margin-right: 20px;
+}
+
+.menu-margin-right-10{
+    margin-right: 10px;
+}
+
+.menu-consumo-flex{
+    display: flex;
+}
+
+.menu-consumo-flex-inline{
+    display: inline-flex;
+}
+
+.menu-align-center{
+    align-self: center;
 }

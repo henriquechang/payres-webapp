@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {itensPedidosListagem, Mesa, valorPagoMesa} from './consumo.service';
-import {ConsumoService} from './consumo.service';
+import { itensPedidosListagem, Mesa, valorPagoMesa } from './consumo.service';
+import { ConsumoService } from './consumo.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   listaValoresPagosMesa: valorPagoMesa[] = [];
   valorRestante: number;
 
-  constructor(private consumoService: ConsumoService) { }
+  constructor(private consumoService: ConsumoService) {}
 
   ngOnInit() {
   }
@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
           },
           (error: any) => this.error = error
         );
-
       },
       (error: any) => this.error = error
     );
@@ -52,7 +51,13 @@ export class AppComponent implements OnInit {
       (listaItensPedidos: itensPedidosListagem[]) => {
         this.listaItensPedidos  =  listaItensPedidos;
         this.valorTotal = this.gerarValorTotal(this.listaItensPedidos);
-        this.valorRestante = this.consumoService.calcularValorRestante(this.listaValoresPagosMesa, this.valorTotal);
+        this.consumoService.getValoresPagosMesa(this.mesaSelecionada.id).subscribe(
+          (listaValoresPagosMesa: valorPagoMesa[]) => {
+            this.listaValoresPagosMesa = listaValoresPagosMesa;
+            this.valorRestante = this.consumoService.calcularValorRestante(this.listaValoresPagosMesa, this.valorTotal);
+          },
+          (error: any) => this.error = error
+        );
       },
       (error: any) => this.error = error
     );

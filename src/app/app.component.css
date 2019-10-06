@@ -1,5 +1,24 @@
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-  }
+.app-titulo {
+   flex: 1 1 auto;
+}
+
+.app-container-flex{
+   display: flex; 
+   flex-wrap: wrap;
+}
+
+.app-flex-mesas{
+   flex: 0 0 25%;
+}
+
+.app-flex-menu{
+   flex: auto;
+}
+
+.app-margin-top{
+   margin-top: 20px;
+}
+
+.app-margin{
+   margin: 20px;
+}

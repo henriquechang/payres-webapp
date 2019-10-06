@@ -1,16 +1,16 @@
 <mat-toolbar color="primary">
-    <span class="example-fill-remaining-space">Payres - Sistema de Gerenciamento de Pagamentos para Restaurantes</span>
+    <span class="app-titulo">Payres - Sistema de Gerenciamento de Pagamentos para Restaurantes</span>
 </mat-toolbar>
-<section style="display: flex; flex-wrap: wrap;">
-        <mat-card style="flex: 0 0 25%; margin: 20px;">
-            <app-lista-mesas style="flex: 0 0 25%; margin-top: 20px;" 
+<section class="app-container-flex">
+        <mat-card class="app-flex-mesas app-margin">
+            <app-lista-mesas class="app-flex-mesas app-margin-top"
             (listaMesaSelecionadaAtualizada)="atualizaMesaSelecionada($event)" 
             (listaItensPedidosAtualizada)="atualizaItensPedidosMesa($event)"
             (mesaSelecionadaInicial)="setMesaInicial($event)">
             </app-lista-mesas>
         </mat-card>
-        <mat-card style="flex: 0 0 65%; margin: 20px;">
-            <app-menu-consumo style="flex: 0 0 65%; margin-top: 20px;" 
+        <mat-card class="app-flex-menu app-margin">
+            <app-menu-consumo class="app-flex-menu app-margin-top" 
             [listaItensPedidos]="listaItensPedidos"
             [listaValoresPagosMesa]="listaValoresPagosMesa"
             [mesaSelecionada]="mesaSelecionada"

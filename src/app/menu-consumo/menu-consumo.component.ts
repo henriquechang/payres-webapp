@@ -1,13 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConsumoService, Mesa } from '../consumo.service';
 import { valorPagoMesa } from '../consumo.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu-consumo',
   templateUrl: './menu-consumo.component.html',
   styleUrls: ['./menu-consumo.component.css']
 })
-export class MenuConsumoComponent implements OnInit {
+export class MenuConsumoComponent{
 
   @Input() listaItensPedidos: []; 
   @Input() mesaSelecionada: Mesa;
@@ -16,11 +17,11 @@ export class MenuConsumoComponent implements OnInit {
   @Input() valorRestante;
   valor: number = 0;
   error: any;
+  snackBarMessage: string;
 
-  constructor( private consumoService: ConsumoService) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private consumoService: ConsumoService, 
+    private _snackBar: MatSnackBar) {}
 
   ngOnChanges(){
     this.valor = 0;
@@ -36,6 +37,15 @@ export class MenuConsumoComponent implements OnInit {
         },
         (error: any) => this.error = error
       );
+    }
+    else{
+      if(valor == 0){
+        this.snackBarMessage = "Favor inserir um valor maior que 0."
+      }
+      else{
+        this.snackBarMessage = "O valor inserido é maior que o valor restante a ser pago."
+      }
+      this.openSnackBar(this.snackBarMessage);
     }
   }
 
@@ -55,8 +65,16 @@ export class MenuConsumoComponent implements OnInit {
       (result) => {
         this.listaItensPedidos = [];
         this.buscarValores();
+        this.snackBarMessage = "Conta fechada."
+        this.openSnackBar(this.snackBarMessage);
       },
       (error: any) => this.error = error
     );
+  }
+
+  openSnackBar(snackBarMessage): void {
+    this._snackBar.open(snackBarMessage, 'Fechar', {
+      duration: 5000,
+    });
   }
 }

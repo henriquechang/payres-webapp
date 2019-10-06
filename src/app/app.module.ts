@@ -27,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListaMesasComponent } from './lista-mesas/lista-mesas.component';
 import { MenuConsumoComponent } from './menu-consumo/menu-consumo.component';
 import { GerarConsumoComponent } from './gerar-consumo/gerar-consumo.component';
-import { GerarConsumoSnackbarComponent } from './gerar-consumo/gerar-consumo.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -36,8 +35,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     AppComponent,
     ListaMesasComponent,
     MenuConsumoComponent,
-    GerarConsumoComponent,
-    GerarConsumoSnackbarComponent
+    GerarConsumoComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +62,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [GerarConsumoComponent, GerarConsumoSnackbarComponent]
+  entryComponents: [GerarConsumoComponent]
 })
  
 export class AppModule { }
