@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://payres-webapp.herokuapp.com/',
+  baseUrl: 'https://payres-backend.herokuapp.com/',
 };
