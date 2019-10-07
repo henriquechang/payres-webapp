@@ -1,5 +1,5 @@
 <label id="mesa-radio-group-label">Selecione uma mesa para visualizar a conta:</label>
-<mat-radio-group [(ngModel)]="mesaSelecionada" (ngModelChange)="onChange($event)" aria-labelledby="mesa-radio-group-label" class="mesa-radio-group">
+<mat-radio-group [(ngModel)]="mesaSelecionada" (ngModelChange)="onChange()" aria-labelledby="mesa-radio-group-label" class="mesa-radio-group">
     <mat-radio-button class="mesa-radio-button" *ngFor="let mesa of mesas" [value]="mesa">
         Mesa {{mesa.id}}
     </mat-radio-button>
