@@ -1,7 +1,7 @@
 # payres-webapp
 ## Payres - Sistema de Gerenciamento de Pagamentos para Restaurantes  🍽 
 
-### Website desenvolvido em Angular 7 + Django. 
+### Website desenvolvido em Angular 6 + Django. 
 
 ##### Link da página: https://payres-webapp.herokuapp.com/
 ##### Link da API: https://payres-backend.herokuapp.com/
