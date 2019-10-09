@@ -1,13 +1,14 @@
 # payres-webapp
 ## Payres - Sistema de Gerenciamento de Pagamentos para Restaurantes  🍽 
 
-### Website desenvolvido em Angular 6 + Django. 
-**Este projeto se refere apenas ao front-end em Angular 6**
+### Website desenvolvido em Angular 6 + Django. ###
+##### Este projeto se refere apenas ao front-end em Angular 6. #####
 
 **Link do back-end: https://github.com/henriquechang/payres-backend/**
 
-##### Link da página: https://payres-webapp.herokuapp.com/
-##### Link da API: https://payres-backend.herokuapp.com/
+**Link da página: https://payres-webapp.herokuapp.com/**
+
+**Link da API: https://payres-backend.herokuapp.com/**
 
 Pontos de melhoria do sistema:
 
@@ -20,3 +21,4 @@ Pontos de melhoria do sistema:
 - Criar uma tabela de ingredientes, que define o custo e o estoque de cada produto no cardápio.
 - Criar um estoque para cada ingrediente, que limita o estoque de cada produto no cardápio.
 - Permitir pagamento opcional de valor de 10% da conta ao garçom.
+
