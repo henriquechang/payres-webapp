@@ -28,7 +28,7 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "material-components-web": "^3.2.0",
     "ngx-mask": "^8.0.6",
     "ngx-toastr": "^11.0.0",
